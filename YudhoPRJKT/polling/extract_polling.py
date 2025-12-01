@@ -2,6 +2,7 @@ from ..bot.types.message import Message
 from .long_polling import long_polling
 from ..utils.create_log import CreateLog
 from ..bot.bot import pick_command
+import asyncio
 
 # Distpatch
 class Distpatch:
@@ -64,6 +65,7 @@ class Telegram:
                 if len(reply_key["photo"]) > 1 and reply_key["photo"][1]:
                     Message.reply_to_message.photo.file_id = reply_key["photo"][1].get("file_id", "")
           await Distpatch.Command()
+          await asyncio.sleep(1)
           return cls
       except KeyError as e:
         CreateLog.Error("Unable to find key for polling", str(e))
