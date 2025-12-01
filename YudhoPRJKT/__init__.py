@@ -8,5 +8,8 @@ from .utils.create_inline import Inline
 from .bot.bot import bot
 # YudhoPRJKT.bots.types
 from .bot.types.message import Message
+from .bot.types.chat_join_request import chat_join_request
+from .bot.types.new_chat_participant import new_chat_participant
+from .bot.types.left_chat_participant import left_chat_participant
 # YudhoPRJKT.polling
 from .polling.extract_polling import Telegram
