@@ -21,7 +21,7 @@ async def send_message(chat_id: Union[str,int], text: Any, parse_mode: str, disa
       'disable_notification': disable_notification,
       'protect_content': protect_content
     }
-    if reply_chat is True:
+    if reply_chat is True or type(reply_chat) is bool:
       payload.update({'reply_parameters': {
         'message_id': Message.message_id
       }})
@@ -29,8 +29,6 @@ async def send_message(chat_id: Union[str,int], text: Any, parse_mode: str, disa
       payload.update({'reply_parameters': {
         'message_id': reply_chat
       }})
-    if reply_chat is False:
-      payload.pop('reply_parameters')
     if reply_markup is not None:
       payload.update({'reply_markup': reply_markup})
     async with aiohttp.ClientSession() as client:
