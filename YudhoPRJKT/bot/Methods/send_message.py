@@ -12,18 +12,23 @@ class DataBots:
   serialized_json: Optional[str] = None
   status_code: Optional[int] = None
 
-async def send_message(chat_id: Union[str,int], text: Any, parse_mode: str, disable_notification: bool = False, protect_content: bool = False, reply_markup: Optional[str] = None, reply_chat: Optional[Union[str, bool]] = Message.message_id):
+async def send_message(chat_id: Union[str,int], text: Any, parse_mode: str, disable_notification: bool = False, protect_content: bool = False, reply_markup: Optional[str] = None, reply_chat: Optional[Union[str, bool]] = True):
   try:
     payload = {
       'chat_id': chat_id,
       'text': text,
       'parse_mode': parse_mode,
       'disable_notification': disable_notification,
-      'protect_content': protect_content,
-      'reply_parameters': {
-        'message_id': Message.message_id
-      }
+      'protect_content': protect_content
     }
+    if reply_chat is True:
+      payload.update({'reply_parameters': {
+        'message_id': Message.message_id
+      }})
+    if type(reply_chat) is str:
+      payload.update({'reply_parameters': {
+        'message_id': reply_chat
+      }})
     if reply_chat is False:
       payload.pop('reply_parameters')
     if reply_markup is not None:
