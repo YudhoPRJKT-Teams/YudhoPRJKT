@@ -19,7 +19,7 @@ async def log_out():
         if session.status == 200:
           return DataBots(raw, json.dumps(raw, indent=2), session.status)
         else:
-          return DataBots()
+          return DataBots(raw, json.dumps(raw, indent=2), session.status)
   except aiohttp.ClientConnectorError as e:
     CreateLog.Error(f"Error while use methods: logOut", str(e))
     return DataBots()

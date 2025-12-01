@@ -29,7 +29,7 @@ async def forward_message(chat_id: Union[str, int], from_chat_id: Union[str, int
         if session.status == 200:
           return DataBots(raw,json.dumps(raw, indent=2), session.status, raw['result']['message_id'])
         else:
-          return DataBots()
+          return DataBots(raw,json.dumps(raw, indent=2), session.status, raw['result']['message_id'])
   except aiohttp.ClientConnectionError as e:
     CreateLog.Error(f"Error while use methods: forwardMessage", str(e))
     return DataBots()

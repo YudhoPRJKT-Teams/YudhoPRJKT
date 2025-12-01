@@ -37,7 +37,7 @@ async def send_message(chat_id: Union[str,int], text: Any, parse_mode: str, disa
         if session.status == 200:
           return DataBots(raw, json.dumps(raw, indent=2), session.status)
         else:
-          return DataBots()
+          return DataBots(raw, json.dumps(raw, indent=2), session.status)
   except aiohttp.ClientConnectorError as e:
     CreateLog.Error(f"Error while use methods: sendMessage", str(e))
     return DataBots()
