@@ -5,6 +5,7 @@ from .Methods.get_me import get_me
 from .Methods.log_out import log_out
 from .Methods.close import close
 from .Methods.send_message import send_message
+from .Methods.forward_message import forward_message
 # Updates
 from .Updates.get_updates import get_updates
 # types.message
@@ -40,7 +41,18 @@ class _methods:
         reply_chat (Optional[Union[str, bool]], optional): Description of the message to reply to. Defaults to Message.message_id.
     """
     return await send_message(chat_id, text, parse_mode, disable_notification, protect_content, reply_markup, reply_chat)
-  
+  @classmethod
+  async def forwardMessage(cls, chat_id: Union[str, int], from_chat_id: Union[str, int] = Message.chat.id, disable_notification: Optional[bool] = False, protect_content: Optional[bool] = False, *, message_id: Union[str,int]):
+    """Use this method to forward messages of any kind. Service messages and messages with protected content can't be forwarded. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
+
+    Args:
+        chat_id (Union[str, int]): Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+        from_chat_id (Union[str, int], optional): Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername). Defaults to Message.chat.id.
+        disable_notification (Optional[bool], optional): Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound. Defaults to False.
+        protect_content (Optional[bool], optional): Protects the contents of the forwarded message from forwarding and saving. Defaults to False.
+        message_id (Union[str,int]): Message identifier in the chat specified in from_chat_id
+    """
+    return await forward_message(chat_id, from_chat_id, disable_notification, protect_content, message_id)
 class _update:
   @classmethod
   async def getUpdates(cls, offset: Optional[int] = None):
