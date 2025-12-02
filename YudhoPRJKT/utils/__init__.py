@@ -6,3 +6,5 @@ from .parse_mode import ParseMode
 from .create_inline import Inline
 # AI Manager
 from .ai_manager import AImanager
+# Telegraph
+from .telegraph_manager import Graph

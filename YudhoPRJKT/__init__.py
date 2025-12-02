@@ -5,6 +5,7 @@ from .utils.create_log import CreateLog
 from .utils.parse_mode import ParseMode
 from .utils.create_inline import Inline
 from .utils.ai_manager import AImanager
+from .utils.telegraph_manager import Graph
 # YudhoPRJKT.bots
 from .bot.bot import bot
 # YudhoPRJKT.bots.types
