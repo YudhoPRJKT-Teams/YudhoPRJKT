@@ -1,2 +1,4 @@
 aiohttp[speedups]
 cryptography
+openai
+google-genai
