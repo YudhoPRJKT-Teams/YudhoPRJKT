@@ -21,14 +21,12 @@ async def send_message(chat_id: Union[str,int], text: Any, parse_mode: str, disa
       'disable_notification': disable_notification,
       'protect_content': protect_content
     }
-    if reply_chat is True or type(reply_chat) is bool:
-      payload.update({'reply_parameters': {
-        'message_id': Message.message_id
-      }})
-    if type(reply_chat) is str:
-      payload.update({'reply_parameters': {
-        'message_id': reply_chat
-      }})
+    # reply_chat
+    if type(reply_chat) is bool and reply_chat is True:
+      payload.update({'reply_parameters': {'message_id': int(Message.message_id)}})
+    elif type(reply_chat) is int:
+      payload.update({'reply_parameters': {'message_id': int(reply_chat)}})
+    # reply_markup
     if reply_markup is not None:
       payload.update({'reply_markup': reply_markup})
     async with aiohttp.ClientSession() as client:

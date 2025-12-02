@@ -28,7 +28,7 @@ class _methods:
     """Use this method to close the bot instance before moving it from one local server to another. You need to delete the webhook before calling this method to ensure that the bot isn't launched again after server restart. The method will return error 429 in the first 10 minutes after the bot is launched. Returns True on success. Requires no parameters."""
     return await close()
   @classmethod
-  async def sendMessage(cls,chat_id: Union[str,int], text: Any, parse_mode: str, disable_notification: bool = False, protect_content: bool = False, reply_markup: Optional[str] = None, reply_chat: Optional[Union[str, bool]] = True):
+  async def sendMessage(cls,chat_id: Union[str,int], text: Any, parse_mode: str, disable_notification: bool = False, protect_content: bool = False, reply_markup: Optional[str] = None, reply_chat: Optional[Union[str, bool]] = False):
     """Use this method to send text messages. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
 
     Args:
@@ -62,10 +62,43 @@ class _update:
         offset (int): Identifier of the first update to be returned. Must be greater by one than the highest among the identifiers of previously received updates. By default, updates starting with the earliest unconfirmed update are returned. An update is considered confirmed as soon as getUpdates is called with an offset higher than its update_id. The negative offset can be specified to retrieve updates starting from -offset update from the end of the updates queue. All previous updates will be forgotten.
     """
     return await get_updates(offset)
+  
+# class Event
+class Event:
+  handlers_user_join = []
+  handlers_joined_user = []
+  handlers_user_left = []
+  handlers_filter = []
+  
+  # User Request Join
+  @classmethod
+  def UserRequest(cls):
+    def decorator(func):
+      cls.handlers_user_join.append(func)
+      return func
+    return decorator
+  
+  # New User Joined
+  @classmethod
+  def NewUser(cls):
+    def decorator(func):
+      cls.handlers_joined_user.append(func)
+      return func
+    return decorator
+  
+  # User Left
+  @classmethod
+  def UserLeft(cls):
+    def decorator(func):
+      cls.handlers_user_left.append(func)
+      return func
+    return decorator
+
 
 class bot:
   methods = _methods
-  updates = _update  
+  updates = _update
+  event = Event
   
   @classmethod
   def command(cls, command: str) -> Callable[[Callable[[], Awaitable[Any]]], Callable[[], Awaitable[Any]]]:
