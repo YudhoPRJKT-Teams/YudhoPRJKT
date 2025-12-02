@@ -1,8 +1,19 @@
 import aiohttp
-import asyncio
+import markdown
 from .create_log import CreateLog
 from dataclasses import dataclass
 from typing import Optional
+from bs4 import BeautifulSoup
+
+
+ALLOWED_TAGS = {
+  "p", "h3", "h4", "strong", "em", "a", 
+  "ul", "ol", "li",
+  "img",
+  "pre", "code",
+  "blockquote",
+  "figure", "figcaption"
+}
 
 @dataclass
 class telegraph_data:
@@ -12,6 +23,60 @@ class telegraph_data:
   access_token: Optional[str] = None
   auth_url: Optional[str] = None
   url: Optional[str] = None
+
+def conv(html: str):
+  soup = BeautifulSoup(html, "html.parser")
+  return parse_children(soup)
+
+def parse_children(element):
+  result = []
+
+  TAG_REPLACE = {
+    "b": "strong",
+    "i": "em",
+    "h1": "h3",
+    "h2": "h3",
+    "h5": "h4",
+    "h6": "h4",
+    "div": "p",
+    "span": "p",
+  }
+
+  for child in element.children:
+    if child.name is None:
+      text = (child.string or "").strip()
+      if text:
+        result.append(text)
+      continue
+
+    tag = child.name.lower()
+
+    if tag not in ALLOWED_TAGS:
+      if tag in TAG_REPLACE:
+        tag = TAG_REPLACE[tag]
+      else:
+        tag = "p"
+
+    if tag == "pre":
+      code_child = child.find("code")
+      text = code_child.get_text() if code_child else child.get_text()
+      result.append({"tag": "pre", "children": [text]})
+      continue
+
+    node = {"tag": tag}
+
+    if tag == "a" and child.get("href"):
+      node["attrs"] = {"href": child["href"]}
+    if tag == "img" and child.get("src"):
+      node["attrs"] = {"src": child["src"]}
+
+    children = parse_children(child)
+    if children:
+      node["children"] = children
+
+    result.append(node)
+
+  return result
 
 class Graph:
   api = 'https://api.telegra.ph'
@@ -52,14 +117,7 @@ class Graph:
         'access_token': a.access_token,
         'title': title,
         'author_name': author_name,
-        'content': [
-          {
-            "tag": "p",
-            "children": [
-              content
-            ]
-          }
-        ],
+        'content': conv(markdown.markdown(content)),
         'return_content': return_content
       }
       async with aiohttp.ClientSession() as client:

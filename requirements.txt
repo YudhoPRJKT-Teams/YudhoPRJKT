@@ -3,3 +3,4 @@ cryptography
 openai
 google-genai
 markdown
+beautifulsoup4
