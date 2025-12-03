@@ -9,7 +9,8 @@ from .Methods import (
   forward_message,
   edit_message_text,
   copy_message,
-  send_photo
+  send_photo,
+  send_audio
 )
 # Updates
 from .Updates import (
@@ -106,6 +107,26 @@ class _methods:
         reply_markup (Optional[Inline], optional): Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Defaults to None.
     """
     return await send_photo(chat_id, photo, caption, parse_mode, show_caption_above_media, has_spoiler, disable_notification, protect_content, reply_chat, reply_markup)
+  @classmethod
+  async def sendAudio(cls, chat_id: Union[str, int], audio: str, caption: str, parse_mode: str, duration: Optional[int] = None, performer: Optional[str] = None, title: Optional[str] = None, disable_notification: Optional[bool] = False, protect_content: Optional[bool] = False,  reply_chat: Optional[Union[bool, str]] = True, reply_markup: Optional[str] = None):
+    """Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+
+    For sending voice messages, use the [sendVoice](https://core.telegram.org/bots/api#sendvoice) method instead.
+
+    Args:
+        chat_id (Union[str, int]): Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+        audio (str): 	Audio file to send. Pass a file_id as String to send an audio file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an audio file from the Internet
+        caption (str): Audio caption, 0-1024 characters after entities parsing
+        parse_mode (str): Mode for parsing entities in the photo caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
+        duration (Optional[int], optional): Duration of the audio in seconds. Defaults to None.
+        performer (Optional[str], optional): Performer. Defaults to None.
+        title (Optional[str], optional): Track name. Defaults to None.
+        disable_notification (Optional[bool], optional): Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound. Defaults to False.
+        protect_content (Optional[bool], optional): _description_. Defaults to False.
+        reply_chat (Optional[Union[bool, str]], optional): Description of the message to reply to. Defaults to True.
+        reply_markup (Optional[Inline], optional): Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Defaults to None.
+    """
+    return await send_audio(chat_id, audio, caption, parse_mode, duration, performer, title, disable_notification, protect_content, reply_chat, reply_markup)
 class _update:
   @classmethod
   async def getUpdates(cls, offset: Optional[int] = None):
