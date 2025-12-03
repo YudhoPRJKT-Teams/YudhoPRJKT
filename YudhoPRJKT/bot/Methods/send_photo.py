@@ -19,13 +19,18 @@ async def send_photo(chat_id: Union[str, int], photo: str, caption: str, parse_m
   try:
     f = FormData()
     f.add_field('chat_id',str(chat_id))
-    f.add_field('photo', open(photo, 'rb').read(), filename=photo)
     f.add_field('caption', str(caption))
     f.add_field('parse_mode', str(parse_mode))
     f.add_field('show_caption_above_media', str(show_caption_above_media).lower())
     f.add_field('has_spoiler', str(has_spoiler).lower())
     f.add_field('disable_notification', str(disable_notification).lower())
     f.add_field('protect_content', str(protect_content).lower())
+    
+    # Check Input photo
+    if photo.startswith('http://') or photo.startswith('https://'):
+      f.add_field('photo', photo)
+    else:
+      f.add_field('photo', open(photo, 'rb').read(), filename=photo)
     if type(reply_chat) is bool and reply_chat is True:
       f.add_field('reply_parameters', json.dumps({
         'message_id': int(Message.message_id)
