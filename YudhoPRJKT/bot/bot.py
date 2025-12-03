@@ -10,7 +10,8 @@ from .Methods import (
   edit_message_text,
   copy_message,
   send_photo,
-  send_audio
+  send_audio,
+  send_document
 )
 # Updates
 from .Updates import (
@@ -127,6 +128,21 @@ class _methods:
         reply_markup (Optional[Inline], optional): Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Defaults to None.
     """
     return await send_audio(chat_id, audio, caption, parse_mode, duration, performer, title, disable_notification, protect_content, reply_chat, reply_markup)
+  @classmethod
+  async def sendDocument(cls, chat_id: Union[str, int], document: str, caption: str, parse_mode: str, disable_notification: Optional[bool] = False, protect_content: Optional[bool] = False, reply_chat: Optional[Union[bool, str]] = True, reply_markup: Optional[str] = None):
+    """Use this method to send general files. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+
+    Args:
+        chat_id (Union[str, int]): Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+        document (str): 	File to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, 
+        caption (str): Audio caption, 0-1024 characters after entities parsing
+        parse_mode (str): Mode for parsing entities in the photo caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
+        disable_notification (Optional[bool], optional): Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound. Defaults to False.
+        protect_content (Optional[bool], optional): Protects the contents of the sent message from forwarding and saving. Defaults to False.
+        reply_chat (Optional[Union[bool, str]], optional): Description of the message to reply to. Defaults to True.
+        reply_markup (Optional[Inline], optional): Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Defaults to None.
+    """
+    return await send_document(chat_id, document, caption, parse_mode, disable_notification, protect_content, reply_chat, reply_markup)
 class _update:
   @classmethod
   async def getUpdates(cls, offset: Optional[int] = None):

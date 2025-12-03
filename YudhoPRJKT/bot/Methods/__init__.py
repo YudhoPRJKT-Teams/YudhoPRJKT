@@ -7,3 +7,4 @@ from .edit_message_text import edit_message_text
 from .copy_message import copy_message
 from .send_photo import send_photo
 from .send_audio import send_audio
+from .send_document import send_document

@@ -8,7 +8,8 @@ from .Methods import (
   edit_message_text,
   copy_message,
   send_photo,
-  send_audio
+  send_audio,
+  send_document
 )
 # Update
 from .Updates import (
