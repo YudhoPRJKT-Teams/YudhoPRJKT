@@ -6,6 +6,7 @@ from .Methods.log_out import log_out
 from .Methods.close import close
 from .Methods.send_message import send_message
 from .Methods.forward_message import forward_message
+from .Methods.edit_message_text import edit_message_text
 # Updates
 from .Updates.get_updates import get_updates
 # types.message
@@ -53,6 +54,18 @@ class _methods:
         message_id (Union[str,int]): Message identifier in the chat specified in from_chat_id
     """
     return await forward_message(chat_id, from_chat_id, disable_notification, protect_content, message_id)
+  @classmethod
+  async def editMessageText(cls, chat_id: Union[str, int], message_id: Union[str, int], text: Any, parse_mode: str, reply_markup: Optional[str] = None):
+    """Use this method to edit text and [game](https://core.telegram.org/bots/api#games) messages. On success, if the edited message is not an inline message, the edited [Message](https://core.telegram.org/bots/api#message) is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+
+    Args:
+        chat_id (Union[str, int]): Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+        message_id (Union[str, int]): Required if inline_message_id is not specified. Identifier of the message to edit
+        text (Any): New text of the message, 1-4096 characters after entities parsing
+        parse_mode (str): Mode for parsing entities in the message text. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
+        reply_markup (Optional[str]): A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards). Default is None
+      """
+    return await edit_message_text(chat_id, message_id, text, parse_mode, reply_markup)
 class _update:
   @classmethod
   async def getUpdates(cls, offset: Optional[int] = None):

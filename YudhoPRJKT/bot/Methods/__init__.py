@@ -3,3 +3,4 @@ from .log_out import log_out
 from .close import close
 from .send_message import send_message
 from .forward_message import forward_message
+from .edit_message_text import edit_message_text
