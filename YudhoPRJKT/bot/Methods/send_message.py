@@ -1,6 +1,6 @@
 import aiohttp
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional, Union, Any
 from ...configs.config import AuthManager
 from ...utils import CreateLog
@@ -8,9 +8,10 @@ from ..types.message import Message
 
 @dataclass
 class DataBots:
-  raw_json: Optional[dict] = None
-  serialized_json: Optional[str] = None
-  status_code: Optional[int] = None
+  raw_json: dict = field(default_factory=dict)
+  serialized_json: str = field(default_factory=str)
+  status_code: int = field(default_factory=int)
+  message_id: str = field(default_factory=str)
 
 async def send_message(chat_id: Union[str,int], text: Any, parse_mode: str, disable_notification: bool = False, protect_content: bool = False, reply_markup: Optional[str] = None, reply_chat: Optional[Union[str, bool]] = True):
   try:
@@ -33,9 +34,9 @@ async def send_message(chat_id: Union[str,int], text: Any, parse_mode: str, disa
       async with client.post(f"{AuthManager.ReadConfig().get('api')}/sendMessage", json=payload) as session:
         raw = await session.json()
         if session.status == 200:
-          return DataBots(raw, json.dumps(raw, indent=2), session.status)
+          return DataBots(raw, json.dumps(raw, indent=2), session.status, raw['result'].get('message_id'),)
         else:
-          return DataBots(raw, json.dumps(raw, indent=2), session.status)
+          return DataBots(raw, json.dumps(raw, indent=2), session.status, raw['result'].get('message_id'),)
   except aiohttp.ClientConnectorError as e:
     CreateLog.Error(f"Error while use methods: sendMessage", str(e))
     return DataBots()

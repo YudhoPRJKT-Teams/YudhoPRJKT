@@ -1,15 +1,16 @@
 import aiohttp
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional, Union, Any
 from ...configs.config import AuthManager
 from ...utils import CreateLog
 
 @dataclass
 class DataBots:
-  raw_json: Optional[dict] = None
-  serialized_json: Optional[str] = None
-  status_code: Optional[int] = None
+  raw_json: dict = field(default_factory=dict)
+  serialized_json: str = field(default_factory=str)
+  status_code: int = field(default_factory=int)
+  message_id: str = field(default_factory=str)
 
 async def get_me():
   try:
