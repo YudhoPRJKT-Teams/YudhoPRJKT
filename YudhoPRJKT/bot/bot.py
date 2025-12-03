@@ -8,7 +8,8 @@ from .Methods import (
   send_message,
   forward_message,
   edit_message_text,
-  copy_message
+  copy_message,
+  send_photo
 )
 # Updates
 from .Updates import (
@@ -16,7 +17,8 @@ from .Updates import (
 )
 # types.message
 from .types.message import Message
-
+# Utils
+from ..utils import ParseMode, Inline
 # Pick command
 pick_command: Dict[str, Callable[[], Awaitable[Any]]] = {}
 
@@ -87,6 +89,23 @@ class _methods:
         reply_markup (Optional[str], optional): Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Defaults to None.
     """
     return await copy_message(chat_id, from_chat_id, message_id, caption, parse_mode, disable_notification, protect_content, reply_chat, reply_markup)
+  @classmethod
+  async def sendPhoto(cls, chat_id: Union[str, int], photo: str, caption: str, parse_mode: str, show_caption_above_media: Optional[bool] = False, has_spoiler: Optional[bool] = False, disable_notification: Optional[bool] = False, protect_content: Optional[bool] = False, reply_chat: Optional[Union[bool, str]] = True, reply_markup: Optional[str] = None):
+    """Use this method to send photos. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
+
+    Args:
+        chat_id (Union[str, int]): Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+        photo (str): Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20
+        caption (str): Photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing
+        parse_mode (str): Mode for parsing entities in the photo caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
+        show_caption_above_media (Optional[bool], optional): Pass True, if the caption must be shown above the message media. Defaults to False.
+        has_spoiler (Optional[bool], optional): Pass True if the photo needs to be covered with a spoiler animation. Defaults to False.
+        disable_notification (Optional[bool], optional): Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound. Defaults to False.
+        protect_content (Optional[bool], optional): Protects the contents of the sent message from forwarding and saving. Defaults to False.
+        reply_chat (Optional[Union[bool, str]], optional): Description of the message to reply to. Defaults to True.
+        reply_markup (Optional[Inline], optional): Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Defaults to None.
+    """
+    return await send_photo(chat_id, photo, caption, parse_mode, show_caption_above_media, has_spoiler, disable_notification, protect_content, reply_chat, reply_markup)
 class _update:
   @classmethod
   async def getUpdates(cls, offset: Optional[int] = None):

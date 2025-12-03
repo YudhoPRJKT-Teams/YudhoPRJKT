@@ -6,7 +6,8 @@ from .Methods import (
   send_message,
   forward_message,
   edit_message_text,
-  copy_message
+  copy_message,
+  send_photo
 )
 # Update
 from .Updates import (
