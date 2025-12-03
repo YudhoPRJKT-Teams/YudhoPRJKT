@@ -5,6 +5,7 @@ from .Methods.close import close
 from .Methods.send_message import send_message
 from .Methods.forward_message import forward_message
 from .Methods.edit_message_text import edit_message_text
+from .Methods.copy_message import copy_message
 # Update
 from .Updates.get_updates import get_updates
 # Bot

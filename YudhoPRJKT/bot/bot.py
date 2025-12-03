@@ -7,6 +7,7 @@ from .Methods.close import close
 from .Methods.send_message import send_message
 from .Methods.forward_message import forward_message
 from .Methods.edit_message_text import edit_message_text
+from .Methods.copy_message import copy_message
 # Updates
 from .Updates.get_updates import get_updates
 # types.message
@@ -66,6 +67,22 @@ class _methods:
         reply_markup (Optional[str]): A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards). Default is None
       """
     return await edit_message_text(chat_id, message_id, text, parse_mode, reply_markup)
+  @classmethod
+  async def copyMessage(cls, chat_id: Union[str, int], from_chat_id: Union[str, int], message_id: Union[str, int], caption: Any, parse_mode: str, disable_notification: Optional[bool] = False, protect_content: Optional[bool] = False, reply_chat: Optional[Union[bool, str]] = False, reply_markup: Optional[str] = None):
+    """Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz [poll](https://core.telegram.org/bots/api#poll) can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method [forwardMessages](https://core.telegram.org/bots/api#forwardmessages), but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an array of [MessageId](https://core.telegram.org/bots/api#messageid) of the sent messages is returned.
+
+    Args:
+        chat_id (Union[str, int]): Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+        from_chat_id (Union[str, int]): Unique identifier for the chat where the original messages were sent (or channel username in the format `@channelusername`)
+        message_id (Union[str, int]): Message identifier in the chat specified in from_chat_id
+        caption (Any): New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept
+        parse_mode (str): Mode for parsing entities in the new caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
+        disable_notification (Optional[bool], optional): Sends the message [silently](Sends the message silently. Users will receive a notification with no sound.). Users will receive a notification with no sound.. Defaults to False.
+        protect_content (Optional[bool], optional): Protects the contents of the sent message from forwarding and saving. Defaults to False.
+        reply_chat (Optional[Union[bool, str]], optional): Description of the message to reply to. Defaults to False.
+        reply_markup (Optional[str], optional): Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Defaults to None.
+    """
+    return await copy_message(chat_id, from_chat_id, message_id, caption, parse_mode, disable_notification, protect_content, reply_chat, reply_markup)
 class _update:
   @classmethod
   async def getUpdates(cls, offset: Optional[int] = None):
