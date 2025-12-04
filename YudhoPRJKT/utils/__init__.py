@@ -10,3 +10,5 @@ from .ai_manager import AImanager
 from .telegraph_manager import Graph
 # Video downloader
 from .video_downloader import DownloadVideo
+# Terminal
+from .terminal import Terminal
