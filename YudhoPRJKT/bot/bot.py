@@ -11,7 +11,8 @@ from .Methods import (
   copy_message,
   send_photo,
   send_audio,
-  send_document
+  send_document,
+  send_video
 )
 # Updates
 from .Updates import (
@@ -143,6 +144,24 @@ class _methods:
         reply_markup (Optional[Inline], optional): Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Defaults to None.
     """
     return await send_document(chat_id, document, caption, parse_mode, disable_notification, protect_content, reply_chat, reply_markup)
+  @classmethod
+  async def sendVideo(cls, chat_id: Union[str, int], video: str, caption: str, parse_mode: str, show_caption_above_media: Optional[bool] = False, has_spoiler: Optional[bool] = False, support_streaming: Optional[bool] = True, disable_notification: Optional[bool] = False, protect_content: Optional[bool] = False, reply_chat: Optional[Union[bool, str]] = True, reply_markup: Optional[str] = None):
+    """Use this method to send video files, Telegram clients support MPEG4 videos (other formats may be sent as [Document](https://core.telegram.org/bots/api#document)). On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+
+    Args:
+        chat_id (Union[str, int]): Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+        video (str): 	Yes	Video to send. Pass a file_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet,
+        caption (str): Audio caption, 0-1024 characters after entities parsing
+        parse_mode (str): Mode for parsing entities in the photo caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
+        show_caption_above_media (Optional[bool], optional): Pass True, if the caption must be shown above the message media. Defaults to False.
+        has_spoiler (Optional[bool], optional): Pass True if the photo needs to be covered with a spoiler animation. Defaults to False.
+        support_streaming (Optional[bool], optional): Pass True if the uploaded video is suitable for streaming. Defaults to True.
+        disable_notification (Optional[bool], optional): Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound. Defaults to False.
+        protect_content (Optional[bool], optional): Protects the contents of the sent message from forwarding and saving. Defaults to False.
+        reply_chat (Optional[Union[bool, str]], optional): Description of the message to reply to. Defaults to True.
+        reply_markup (Optional[Inline], optional): Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Defaults to None.
+    """
+    return await send_video(chat_id, video, caption, parse_mode, show_caption_above_media, has_spoiler, support_streaming, disable_notification, protect_content, reply_chat, reply_markup)
 class _update:
   @classmethod
   async def getUpdates(cls, offset: Optional[int] = None):

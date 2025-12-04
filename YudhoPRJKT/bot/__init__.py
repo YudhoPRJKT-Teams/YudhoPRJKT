@@ -9,7 +9,8 @@ from .Methods import (
   copy_message,
   send_photo,
   send_audio,
-  send_document
+  send_document,
+  send_video
 )
 # Update
 from .Updates import (
