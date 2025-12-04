@@ -8,3 +8,5 @@ from .create_inline import Inline
 from .ai_manager import AImanager
 # Telegraph
 from .telegraph_manager import Graph
+# Video downloader
+from .video_downloader import DownloadVideo

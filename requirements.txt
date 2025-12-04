@@ -4,3 +4,4 @@ openai
 google-genai
 markdown
 beautifulsoup4
+yt-dlp
