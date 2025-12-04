@@ -12,7 +12,7 @@ class DataBots:
   status_code: int = field(default_factory=int)
   message_id: str = field(default_factory=str)
 
-async def get_me():
+async def get_me() -> DataBots:
   try:
     async with aiohttp.ClientSession() as client:
       async with client.get(f"{AuthManager.ReadConfig().get('api')}/getMe") as session:

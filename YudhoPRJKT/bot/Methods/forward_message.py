@@ -14,7 +14,7 @@ class DataBots:
   message_id: str = field(default_factory=str)
   
   
-async def forward_message(chat_id: Union[str, int], from_chat_id: Union[str, int] = Message.chat.id, disable_notification: Optional[bool] = False, protect_content: Optional[bool] = False, message_id: Union[str,int] = Message.message_id):
+async def forward_message(chat_id: Union[str, int], from_chat_id: Union[str, int] = Message.chat.id, disable_notification: Optional[bool] = False, protect_content: Optional[bool] = False, message_id: Union[str,int] = Message.message_id) -> DataBots:
   try:
     payload = {
       'chat_id': chat_id,

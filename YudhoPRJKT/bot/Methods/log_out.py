@@ -12,7 +12,7 @@ class DataBots:
   status_code: int = field(default_factory=int)
   message_id: str = field(default_factory=str)
 
-async def log_out():
+async def log_out() -> DataBots:
   try:
     async with aiohttp.ClientSession() as client:
       async with client.get(f"{AuthManager.ReadConfig().get('api')}/logOut") as session:

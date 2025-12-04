@@ -13,7 +13,7 @@ class DataBots:
   status_code: int = field(default_factory=int)
   message_id: str = field(default_factory=str)
 
-async def send_message(chat_id: Union[str,int], text: Any, parse_mode: str, disable_notification: bool = False, protect_content: bool = False, reply_markup: Optional[str] = None, reply_chat: Optional[Union[str, bool]] = True):
+async def send_message(chat_id: Union[str,int], text: Any, parse_mode: str, disable_notification: bool = False, protect_content: bool = False, reply_markup: Optional[str] = None, reply_chat: Optional[Union[str, bool]] = True) -> DataBots:
   try:
     payload = {
       'chat_id': chat_id,

@@ -12,7 +12,7 @@ class DataBots:
   status_code: int = field(default_factory=int)
   message_id: str = field(default_factory=str)
 
-async def get_updates(offset: Optional[int] = None):
+async def get_updates(offset: Optional[int] = None) -> DataBots:
   try:
     payload = {'timeout': 0}
     if offset is not None:

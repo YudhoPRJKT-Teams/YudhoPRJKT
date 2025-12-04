@@ -15,7 +15,7 @@ class DataBots:
   status_code: int = field(default_factory=int)
   message_id: str = field(default_factory=str)
 
-async def send_audio(chat_id: Union[str, int], audio: str, caption: str, parse_mode: str, duration: Optional[int] = None, performer: Optional[str] = None, title: Optional[str] = None, disable_notification: Optional[bool] = False, protect_content: Optional[bool] = False,  reply_chat: Optional[Union[bool, str]] = True, reply_markup: Optional[str] = None):
+async def send_audio(chat_id: Union[str, int], audio: str, caption: str, parse_mode: str, duration: Optional[int] = None, performer: Optional[str] = None, title: Optional[str] = None, disable_notification: Optional[bool] = False, protect_content: Optional[bool] = False,  reply_chat: Optional[Union[bool, str]] = True, reply_markup: Optional[str] = None) -> DataBots:
   try:
     f = FormData()
     f.add_field('chat_id',str(chat_id))

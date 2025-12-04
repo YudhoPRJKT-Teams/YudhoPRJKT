@@ -12,7 +12,7 @@ class DataBots:
   status_code: int = field(default_factory=int)
   message_id: str = field(default_factory=str)
   
-async def edit_message_text(chat_id: Union[str, int], message_id: Union[str,int], text: Any, parse_mode: str, reply_markup: Optional[str] = None):
+async def edit_message_text(chat_id: Union[str, int], message_id: Union[str,int], text: Any, parse_mode: str, reply_markup: Optional[str] = None) -> DataBots:
   try:
     payload = {
       'chat_id': chat_id,
