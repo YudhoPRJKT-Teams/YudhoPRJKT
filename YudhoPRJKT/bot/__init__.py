@@ -10,7 +10,8 @@ from .Methods import (
   send_photo,
   send_audio,
   send_document,
-  send_video
+  send_video,
+  send_animation
 )
 # Update
 from .Updates import (

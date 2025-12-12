@@ -12,7 +12,8 @@ from .Methods import (
   send_photo,
   send_audio,
   send_document,
-  send_video
+  send_video,
+  send_animation
 )
 # Updates
 from .Updates import (
@@ -162,6 +163,28 @@ class _methods:
         reply_markup (Optional[Inline], optional): Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Defaults to None.
     """
     return await send_video(chat_id, video, caption, parse_mode, show_caption_above_media, has_spoiler, support_streaming, disable_notification, protect_content, reply_chat, reply_markup)
+  @classmethod
+  async def sendAnimation(cls, chat_id: int | str, animation: str, duration: int | None = None, width: int | None = None, height: int | None = None, thumbnail: str | None = None, caption: str | None = None, parse_mode: str | None = None, show_caption_above_media: bool = True, has_spoiler: bool = False, disable_notification: bool = False, protect_content: bool = False, reply_chat: bool | str = False, reply_markup: str | None = None):
+    """Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+
+    Args:
+        chat_id (str): Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+        animation (str): 	Animation to send. Pass a file_id as String to send an animation that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload your file 
+        duration (int | None, optional): Duration of sent animation in seconds. Defaults to None.
+        width (int | None, optional): Animation width. Defaults to None.
+        height (int | None, optional): Animation height. Defaults to None.
+        thumbnail (str | None, optional): 	Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. Defaults to None.
+        caption (str | None, optional): Animation caption (may also be used when resending animation by file_id), 0-1024 characters after entities parsing. Defaults to None.
+        parse_mode (str | None, optional): Mode for parsing entities in the photo caption. See [formatting options](https://core.telegram.org/bots/api#formatting-options) for more details.
+        caption_entities (list | None, optional): A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode. Defaults to None.
+        show_caption_above_media (bool, optional): Pass True, if the caption must be shown above the message media. Defaults to True.
+        has_spoiler (bool, optional): Pass True if the animation needs to be covered with a spoiler animation. Defaults to False.
+        disable_notification (bool, optional): Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound.. Defaults to False.
+        protect_content (bool, optional): Protects the contents of the sent message from forwarding and saving. Defaults to False.
+        reply_chat (str | bool, optional): Description of the message to reply to. Defaults to False
+        reply_markup (str | None, optional): Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Defaults to None.
+    """
+    return await send_animation(chat_id, animation, duration, width, height, thumbnail, caption, parse_mode, show_caption_above_media, has_spoiler, disable_notification, protect_content, reply_chat, reply_markup)
 class _update:
   @classmethod
   async def getUpdates(cls, offset: Optional[int] = None):

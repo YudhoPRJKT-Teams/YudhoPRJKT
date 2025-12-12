@@ -9,3 +9,4 @@ from .send_photo import send_photo
 from .send_audio import send_audio
 from .send_document import send_document
 from .send_video import send_video
+from .send_animation import send_animation
