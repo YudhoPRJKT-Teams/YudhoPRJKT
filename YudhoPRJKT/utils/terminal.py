@@ -2,7 +2,7 @@ import subprocess
 import io
 import sys
 import textwrap
-import traceback
+import re
 import ast
 import inspect
 from .create_log import CreateLog
@@ -89,4 +89,6 @@ async def __eval_async():
     finally:
       sys.stdout = stdout
       sys.stderr = stderr
-    return output_buffer.getvalue() + (err_msg if err_msg else '')
+    base_output = output_buffer.getvalue() + (err_msg if err_msg else '')
+    base_output = re.sub(r'\bNone\b', '', base_output)
+    return base_output
