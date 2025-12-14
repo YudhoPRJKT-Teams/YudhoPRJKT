@@ -11,7 +11,8 @@ from .Methods import (
   send_audio,
   send_document,
   send_video,
-  send_animation
+  send_animation,
+  send_voice
 )
 # Update
 from .Updates import (

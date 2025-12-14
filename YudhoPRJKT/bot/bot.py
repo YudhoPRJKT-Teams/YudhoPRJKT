@@ -13,7 +13,8 @@ from .Methods import (
   send_audio,
   send_document,
   send_video,
-  send_animation
+  send_animation,
+  send_voice
 )
 # Updates
 from .Updates import (
@@ -185,6 +186,29 @@ class _methods:
         reply_markup (str | None, optional): Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Defaults to None.
     """
     return await send_animation(chat_id, animation, duration, width, height, thumbnail, caption, parse_mode, show_caption_above_media, has_spoiler, disable_notification, protect_content, reply_chat, reply_markup)
+  @classmethod
+  async def sendVoice(cls, chat_id: int | str, voice: str, caption: str | None = None, parse_mode: str | None = None, duration: int | None = None, disable_notification: bool = False, protect_content: bool = False, reply_chat: bool | str = False, reply_markup: str | None = None, business_connection_id: str | None = None, message_thread_id: int | str | None = None, direct_messages_topic_id: int | str | None = None, caption_entities: list | None = None, allow_paid_broadcast: bool = True, message_effect_id: str | None = None, suggested_post_parameters: str  | None = None):
+    """Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format (other formats may be sent as [Audio](https://core.telegram.org/bots/api#audio) or [Document](https://core.telegram.org/bots/api#document)). On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+
+    Args:
+        chat_id (int | str): Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+        voice (str): Audio file to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a file from path
+        caption (str | None, optional): Voice message caption, 0-1024 characters after entities parsing. Defaults to None.
+        parse_mode (str | None, optional): Mode for parsing entities in the voice message caption. Defaults to None.
+        duration (int | None, optional): Duration of the voice message in seconds. Defaults to None.
+        disable_notification (bool, optional): Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound.. Defaults to False.
+        protect_content (bool, optional): Protects the contents of the sent message from forwarding and saving. Defaults to False.
+        reply_chat (str | bool, optional): Description of the message to reply to. Defaults to False
+        reply_markup (str | None, optional): Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Defaults to None.
+        business_connection_id (str | None, optional): Unique identifier of the business connection on behalf of which the message will be sent. Defaults to None.
+        message_thread_id (int | str | None, optional): Unique identifier for the target message thread (topic) of the forum; for forum supergroups only. Defaults to None.
+        direct_messages_topic_id (int | str | None, optional): Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat. Defaults to None.
+        caption_entities (list | None, optional): Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat. Defaults to None.
+        allow_paid_broadcast (bool, optional): Pass True to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. Defaults to True.
+        message_effect_id (str | None, optional): Unique identifier of the message effect to be added to the message; for private chats only. Defaults to None.
+        suggested_post_parameters (str | None, optional): A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. Defaults to None.
+    """
+    return await send_voice(chat_id, voice, caption, parse_mode, duration, disable_notification, protect_content, reply_chat, reply_markup, business_connection_id, message_thread_id, direct_messages_topic_id, caption_entities, allow_paid_broadcast, message_effect_id, suggested_post_parameters)
 class _update:
   @classmethod
   async def getUpdates(cls, offset: Optional[int] = None):
