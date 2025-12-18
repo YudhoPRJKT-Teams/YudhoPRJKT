@@ -11,3 +11,4 @@ from .send_document import send_document
 from .send_video import send_video
 from .send_animation import send_animation
 from .send_voice import send_voice
+from .send_video_note import send_video_note

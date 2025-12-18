@@ -14,7 +14,8 @@ from .Methods import (
   send_document,
   send_video,
   send_animation,
-  send_voice
+  send_voice,
+  send_video_note
 )
 # Updates
 from .Updates import (
@@ -209,6 +210,60 @@ class _methods:
         suggested_post_parameters (str | None, optional): A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined. Defaults to None.
     """
     return await send_voice(chat_id, voice, caption, parse_mode, duration, disable_notification, protect_content, reply_chat, reply_markup, business_connection_id, message_thread_id, direct_messages_topic_id, caption_entities, allow_paid_broadcast, message_effect_id, suggested_post_parameters)
+  @classmethod
+  async def sendVideoNote(cls,
+    chat_id: int | str, 
+    video_note: str, 
+    business_connection_id: str | None = None, 
+    message_thread_id: int | None = None, 
+    direct_messages_topic_id: int | None = None, 
+    duration: int | None = None,
+    length: int | None = None,
+    thumbnail: str | None = None,
+    message_effect_id: str | None = None,
+    suggested_post_parameters: str | None = None,
+    disable_notification: bool = False,
+    protect_content: bool = False,
+    allow_paid_broadcast: bool = True,
+    reply_chat: bool | str = False,
+    reply_markup: str | None = None
+  ):
+    """As of [v.4.0](https://telegram.org/blog/video-messages-and-telescope), Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
+
+    Args:
+        chat_id (int | str): Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+        video_note (str): Video note to send. Pass a file_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video
+        business_connection_id (str | None, optional): Unique identifier of the business connection on behalf of which the message will be sent. Defaults to None.
+        message_thread_id (int | None, optional): Unique identifier for the target message thread (topic) of the forum; for forum supergroups only. Defaults to None.
+        direct_messages_topic_id (int | None, optional): Unique identifier for the target message thread (topic) of the forum; for forum supergroups only. Defaults to None.
+        duration (int | None, optional): Duration of sent video in seconds. Defaults to None.
+        length (int | None, optional): Video width and height, i.e. diameter of the video message. Defaults to None.
+        thumbnail (str | None, optional): Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320.. Defaults to None.
+        message_effect_id (str | None, optional): Unique identifier of the message effect to be added to the message; for private chats only. Defaults to None.
+        suggested_post_parameters (str | None, optional): A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.. Defaults to None.
+        disable_notification (bool, optional): Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound. Defaults to False.
+        protect_content (bool, optional): Protects the contents of the sent message from forwarding and saving. Defaults to False.
+        allow_paid_broadcast (bool, optional): Pass True to allow up to 1000 messages per second. Defaults to True.
+        reply_chat (str | bool, optional): Description of the message to reply to. Defaults to False
+        reply_markup (str | None, optional): Additional interface options. A JSON-serialized object for an [inline keyboard](https://core.telegram.org/bots/features#inline-keyboards), [custom reply keyboard](https://core.telegram.org/bots/features#keyboards), instructions to remove a reply keyboard or to force a reply from the user. Defaults to None.
+    """
+    return await send_video_note(
+      chat_id,
+      video_note,
+      business_connection_id,
+      message_thread_id,
+      direct_messages_topic_id,
+      duration,
+      length,
+      thumbnail,
+      message_effect_id,
+      suggested_post_parameters,
+      disable_notification,
+      protect_content,
+      allow_paid_broadcast,
+      reply_chat,
+      reply_markup
+    )
 class _update:
   @classmethod
   async def getUpdates(cls, offset: Optional[int] = None):
