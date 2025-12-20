@@ -13,7 +13,8 @@ from .Methods import (
   send_video,
   send_animation,
   send_voice,
-  send_video_note
+  send_video_note,
+  send_paid_media
 )
 # Update
 from .Updates import (

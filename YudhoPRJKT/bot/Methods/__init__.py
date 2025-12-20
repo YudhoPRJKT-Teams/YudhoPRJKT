@@ -12,3 +12,4 @@ from .send_video import send_video
 from .send_animation import send_animation
 from .send_voice import send_voice
 from .send_video_note import send_video_note
+from .send_paid_media import send_paid_media

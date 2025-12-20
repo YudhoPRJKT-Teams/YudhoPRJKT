@@ -15,7 +15,8 @@ from .Methods import (
   send_video,
   send_animation,
   send_voice,
-  send_video_note
+  send_video_note,
+  send_paid_media
 )
 # Updates
 from .Updates import (
@@ -264,6 +265,13 @@ class _methods:
       reply_chat,
       reply_markup
     )
+  @classmethod
+  async def sendPaidMedia(cls,
+    chat_id: int | str,
+    star_count: int,
+    media: str,
+  ):
+    return await send_paid_media(chat_id, star_count, media)
 class _update:
   @classmethod
   async def getUpdates(cls, offset: Optional[int] = None):
