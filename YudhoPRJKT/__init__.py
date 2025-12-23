@@ -1,5 +1,5 @@
 # utils
-from .utils import CreateLog
+from .utils import Log
 # configs
 from .configs import Config
 # Base Connector

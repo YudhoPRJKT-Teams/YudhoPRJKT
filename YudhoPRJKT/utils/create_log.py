@@ -3,7 +3,7 @@ from typing import Optional
 import os
 import inspect
 
-class CreateLog:
+class Log:
   logpath = f'{os.getcwd()}/event.log'
   @classmethod
   def SaveLog(cls):

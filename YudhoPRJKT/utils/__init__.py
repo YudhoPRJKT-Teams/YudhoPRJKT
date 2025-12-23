@@ -1,1 +1,1 @@
-from .create_log import CreateLog
+from .create_log import Log
