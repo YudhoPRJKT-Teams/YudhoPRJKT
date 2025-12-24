@@ -1,1 +1,1 @@
-from .connector import BaseConnector
+from .connector import BaseConnector, ConnectorSync

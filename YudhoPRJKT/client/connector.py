@@ -1,4 +1,5 @@
 import aiohttp
+import httpx
 import json
 from .exceptions import ConnectionError
 
@@ -86,3 +87,76 @@ class BaseConnector:
         url (str): your target links
     """
     return cls(url, "POST", **kwargs)
+  
+
+class ConnectorSync:
+  def __init__(self, url, methods, *, params=None, data=None, json_data=None, headers=None):
+    self.url = url
+    self.methods = methods
+    self.params = params
+    self.data = data
+    self.json_data = json_data
+    self.headers = headers
+    self._client = None
+    self._res = None
+    self._raw_cache = None
+    
+    
+  def __enter__(self):
+    try:
+      self._cl = httpx.Client()
+      self._res = self._cl.request(
+        method=self.methods,
+        url=self.url,
+        params=self.params,
+        data=self.data,
+        json=self.json_data,
+        headers=self.headers,
+      )
+      try:
+        self._raw_cache = self._res.json()
+      except ValueError:
+        self._raw_cache = self._res.text
+      return self
+    except httpx.HTTPError as e:
+      if self._client:
+        self._client.close()
+      raise ConnectionError("Got Error!", str(e), 400)
+
+  def __exit__(self, exc_type, exc, tb):
+    if self._client:
+      self._client.close()
+    return False
+  @property
+  def status_code(self):
+    return self._res.status_code if self._res else None
+
+  @property
+  def raw(self):
+    return self._raw_cache
+
+  @property
+  def serilized_json(self):
+    if isinstance(self._raw_cache, (dict, list)):
+      return json.dumps(self._raw_cache, indent=2)
+    return self._raw_cache
+
+  def text(self):
+    if self._res is None:
+      raise RuntimeError("Connection not initialized. Use 'with ConnectorSync(...)'")
+    return self._res.text
+  @classmethod
+  def get(cls, url: str, **kwargs):
+    return cls(url, "GET", **kwargs)
+
+  @classmethod
+  def post(cls, url: str, **kwargs):
+    return cls(url, "POST", **kwargs)
+
+  @classmethod
+  def put(cls, url: str, **kwargs):
+    return cls(url, "PUT", **kwargs)
+
+  @classmethod
+  def delete(cls, url: str, **kwargs):
+    return cls(url, "DELETE", **kwargs)
