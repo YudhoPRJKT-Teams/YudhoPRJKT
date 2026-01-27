@@ -1,0 +1,4 @@
+**/.env
+**/.venv
+**/event.log
+**/main.py

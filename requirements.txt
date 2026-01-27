@@ -1,0 +1,4 @@
+aiohttp[speedups]
+python-dotenv
+google-genai
+openai
