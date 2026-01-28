@@ -22,27 +22,27 @@ class Inline(str):
       elif url:
         button['url'] = url
       return button
-    class Keyboard:
-      @staticmethod
-      def add(text, callback_data=None, url=None):
-        """This function creates an inline keyboard.
+  class keyboard:
+    @staticmethod
+    def add(text, callback_data=None, url=None):
+      """This function creates an inline keyboard.
 
-        Args:
-            text (str): The text that will be displayed on the keyboard.
-            callback_data (str): The data that will be sent to the bot when the keyboard is clicked. Defaults to None.
-            url (str): The URL that will be opened when the keyboard is clicked. Defaults to None.
-            resize_keyboard (bool): Whether to resize the keyboard. Defaults to True.
-            one_time_keyboard (bool): Whether to show the keyboard only once. Defaults to True.
-        """
-        if callback_data and url:
-          raise ValueError("A button can only have either callback_data or a URL, not both.")
-        
-        button = {'text': text}
-        if callback_data:
-          button['callback_data'] = callback_data
-        elif url:
-          button['url'] = url
-        return button
+      Args:
+          text (str): The text that will be displayed on the keyboard.
+          callback_data (str): The data that will be sent to the bot when the keyboard is clicked. Defaults to None.
+          url (str): The URL that will be opened when the keyboard is clicked. Defaults to None.
+          resize_keyboard (bool): Whether to resize the keyboard. Defaults to True.
+          one_time_keyboard (bool): Whether to show the keyboard only once. Defaults to True.
+      """
+      if callback_data and url:
+        raise ValueError("A button can only have either callback_data or a URL, not both.")
+      
+      button = {'text': text}
+      if callback_data:
+        button['callback_data'] = callback_data
+      elif url:
+        button['url'] = url
+      return button
         
   class Rows:
     """Create Rows Inline Button/Keyboard"""
