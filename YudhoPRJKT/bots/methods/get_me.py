@@ -17,5 +17,6 @@ class get_me(TelegramMethods):
       self.user.supports_inline_queries = updater.get('supports_inline_queries', 'no-supports_inline_queries')
       self.user.can_connect_to_business = updater.get('can_connect_to_business', 'no-can_connect_to_business')
       self.user.has_main_web_app = updater.get('has_main_web_app', 'no-has_main_web_app')
+    return self
   def __str__(self) -> str:
     return self.serialized_json
