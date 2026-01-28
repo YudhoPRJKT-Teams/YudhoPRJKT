@@ -108,6 +108,31 @@ class _methods:
         Message: On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
     """
     return forward_message(chat_id, from_chat_id, message_id, message_thread_id, direct_messages_topic_id, video_start_timestamp, disable_notification, protect_content, message_effect_id, suggested_post_parameters)
+  def forwardMessages(self,
+    chat_id: int | str,
+    from_chat_id: int | str,
+    message_ids: list,
+    disable_notification: bool = False,
+    protect_content: bool = False,
+    # Optional
+    message_thread_id: int | None = None,
+    direct_messages_topic_id: int | None = None
+  ):
+    """Use this method to forward multiple messages of any kind. If some of the specified messages can't be found or forwarded, they are skipped. Service messages and messages with protected content can't be forwarded. Album grouping is kept for forwarded messages.
+
+    Args:
+        chat_id (int | str): Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+        from_chat_id (int | str): Unique identifier for the chat where the original messages were sent (or channel username in the format `@channelusername`)
+        message_ids (list): A JSON-serialized list of 1-100 identifiers of messages in the chat from_chat_id to forward. The identifiers must be specified in a strictly increasing order.
+        disable_notification (bool, optional): Sends the messages [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound.. Defaults to False.
+        protect_content (bool, optional): Protects the contents of the forwarded messages from forwarding and saving. Defaults to False.
+        message_thread_id (int | None, optional): Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only. Defaults to None.
+        direct_messages_topic_id (int | None, optional): Identifier of the direct messages topic to which the messages will be forwarded; required if the messages are forwarded to a direct messages chat. Defaults to None.
+
+    Returns:
+        MessageId: On success, an array of MessageId of the sent messages is returned.
+    """
+    return forward_messages(chat_id, from_chat_id, message_ids, disable_notification, protect_content, message_thread_id, direct_messages_topic_id)
 class Bot:
   def __init__(self) -> None:
     self.methods = _methods()

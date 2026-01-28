@@ -7,4 +7,4 @@ from .connector import TelegramMethods, BaseConnector
 from .auth import Auth
 # bot
 from .bots import Bot
-from .bots.types import User, Message, MessageEntity, LinkPreviewOptions, SuggestedPostPrice, SuggestedPostParameters
+from .bots.types import User, Message, MessageEntity, LinkPreviewOptions, SuggestedPostPrice, SuggestedPostParameters, MessageId
