@@ -130,7 +130,6 @@ class TelegramMethods(BaseConnector):
     return self
   @property
   def serialized_json(self):
-    print(self.raw_cache)
     if hasattr(self, 'raw_cache') and self.raw_cache is not None:
       return super().serialized_json
     return "{}"
