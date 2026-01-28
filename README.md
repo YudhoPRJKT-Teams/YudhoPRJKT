@@ -48,5 +48,5 @@ if __name__ == '__main__':
 Will Posted Soon
 
 ## Contact Me
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/960px-Telegram_logo.svg.png" alt="Contact me on telegram" style="display: block; margin: 0 auto; width: 10%;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/960px-Telegram_logo.svg.png" style="display: block; margin: 0 auto; width: 10%;">
 <a href="https://t.me/YudhoPatrianto" style='display: block; text-align:center; font-family: Arial;'>Contact me on telegram</p>
