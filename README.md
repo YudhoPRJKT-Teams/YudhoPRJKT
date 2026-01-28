@@ -1,6 +1,6 @@
 <h2 align='center'>YudhoPRJKT<h2>
 
-<h3>YudhoPRJKT is a Python library for creating Telegram Bots using your custom api</h3>
+YudhoPRJKT is a Python library for creating Telegram Bots using your custom api
 
 ## Installation
 Use Package Manager/PIP
@@ -16,7 +16,7 @@ source .venv/bin/activate
 pip3 install -r requirements.txt
 ```
 
-### Authentication
+## Authentication
 Make Credentials First (After this complete you can remove this code)
 ```python
 from YudhoPRJKT.auth import Auth
@@ -24,7 +24,7 @@ from YudhoPRJKT.auth import Auth
 my_auth = Auth()
 my_auth.UseCustomApi('http://api.myproject.com')
 ```
-### Usage
+## Usage
 ```python 
 from YudhoPRJKT.bots import Bots
 from YudhoPRJKT.bots.types import Message
@@ -44,7 +44,7 @@ async def command_start(m=Message()):
 if __name__ == '__main__':
   asyncio.run(bot.run())
 ```
-### Documentation
+## Documentation
 Will Posted Soon
 
 ## Contact Me
