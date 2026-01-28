@@ -4,3 +4,4 @@ from .inline import Inline
 from .ai_manager import AI_Manager
 from .types_telegraph import Account, NodeElement, PageList, PageViews, Page
 from .telegraph import Telegraph
+from .exec_time import ExecutionTime
