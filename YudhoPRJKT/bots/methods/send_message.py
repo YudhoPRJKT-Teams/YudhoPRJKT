@@ -46,7 +46,7 @@ class send_message(TelegramMethods):
       self.payload.update({'suggested_post_parameters': suggested_post_parameters})
     super().__init__('sendMessage', 'POST', json=self.payload)
   def reply(self):
-    """Reply """
+    """Reply Message"""
     self.message_id: int
     self.chat_id: int
     if self.message.message_id:
