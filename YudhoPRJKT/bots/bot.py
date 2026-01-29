@@ -174,6 +174,33 @@ class _methods:
         MessageId: On success, an array of MessageId of the sent messages is returned.
     """
     return copy_message(chat_id, from_chat_id, message_id, show_caption_above_media, disable_notification, protect_content, allow_paid_broadcast, message_thread_id, direct_messages_topic_id, video_start_timestamp, caption, parse_mode, caption_entities, message_effect_id, suggested_post_parameters)
+  def copyMessages(self,
+    chat_id: int | str,
+    from_chat_id: int | str,
+    message_ids: list,
+    disable_notification: bool = False,
+    protect_content: bool = False,
+    remove_caption: bool = False,
+    # Optional
+    message_thread_id: int | None = None,
+    direct_messages_topic_id: int | None = None,
+  ):
+    """Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz [poll](https://core.telegram.org/bots/api#poll) can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method [forwardMessages](https://core.telegram.org/bots/api#forwardmessages), but the copied messages don't have a link to the original message. Album grouping is kept for copied messages
+
+    Args:
+        chat_id (int | str): Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+        from_chat_id (int | str): Unique identifier for the chat where the original messages were sent (or channel username in the format `@channelusername`)
+        message_ids (list): A JSON-serialized list of 1-100 identifiers of messages in the chat from_chat_id to copy. The identifiers must be specified in a strictly increasing order.
+        disable_notification (bool, optional): Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound. Defaults to False.
+        protect_content (bool, optional): Protects the contents of the sent message from forwarding and saving. Defaults to False.        protect_content (bool, optional): _description_. Defaults to False.
+        remove_caption (bool, optional): Pass True to copy the messages without their captions. Defaults to False.
+        message_thread_id (int | None, optional): Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only. Defaults to None.
+        direct_messages_topic_id (int | None, optional): Identifier of the direct messages topic to which the messages will be sent; required if the messages are sent to a direct messages chat. Defaults to None.
+
+    Returns:
+        MessageId: On success, an array of [MessageId](https://core.telegram.org/bots/api#messageid) of the sent messages is returned.
+    """
+    return copy_messages(chat_id, from_chat_id, message_ids, disable_notification, protect_content, remove_caption, message_thread_id, direct_messages_topic_id)
 class Bot:
   def __init__(self) -> None:
     self.methods = _methods()
