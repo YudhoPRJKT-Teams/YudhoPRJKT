@@ -201,6 +201,47 @@ class _methods:
         MessageId: On success, an array of [MessageId](https://core.telegram.org/bots/api#messageid) of the sent messages is returned.
     """
     return copy_messages(chat_id, from_chat_id, message_ids, disable_notification, protect_content, remove_caption, message_thread_id, direct_messages_topic_id)
+  def sendPhoto(self,
+    chat_id: int | str,
+    photo: str,
+    show_caption_above_media: bool = True,
+    has_spoiler: bool = False,
+    disable_notification: bool = False,
+    protect_content: bool = False,
+    allow_paid_broadcast: bool = True,
+    # Optional
+    business_connection_id: str | None = None,
+    message_thread_id: int | None = None,
+    direct_messages_topic_id: int | None = None,
+    caption: str | None = None,
+    parse_mode: ParseMode | None = None,
+    caption_entities: MessageEntity | None = None,
+    message_effect_id: str | None = None,
+    suggested_post_parameters: SuggestedPostParameters | None = None,
+  ):
+    """Use this method to send photos. 
+
+    Args:
+        chat_id (int | str): Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+        photo (str): 	Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. 
+        show_caption_above_media (bool, optional): Pass True, if the caption must be shown above the message media. Defaults to True.
+        has_spoiler (bool, optional): Pass True if the photo needs to be covered with a spoiler animation. Defaults to False.
+        disable_notification (bool, optional): Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound.. Defaults to False.
+        protect_content (bool, optional): Protects the contents of the sent message from forwarding and saving. Defaults to False.
+        allow_paid_broadcast (bool, optional): _description_. Defaults to True.
+        business_connection_id (str | None, optional): Unique identifier of the business connection on behalf of which the message will be sent. Defaults to None.
+        message_thread_id (int | None, optional): Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only. Defaults to None.
+        direct_messages_topic_id (int | None, optional): Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat. Defaults to None.
+        caption (str | None, optional): Photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing. Defaults to None.
+        parse_mode (ParseMode | None, optional): Mode for parsing entities in the photo caption. Defaults to None.
+        caption_entities (MessageEntity | None, optional): A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode. Defaults to None.
+        message_effect_id (str | None, optional): Unique identifier of the message effect to be added to the message; for private chats only. Defaults to None.
+        suggested_post_parameters (SuggestedPostParameters | None, optional): A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.. Defaults to None.
+
+    Returns:
+        Message: On success, the sent [Message](https://core.telegram.org/bots/api#message) is returned.
+    """
+    return send_photo(chat_id, photo, show_caption_above_media, has_spoiler, disable_notification, protect_content, allow_paid_broadcast, business_connection_id, message_thread_id, direct_messages_topic_id, caption, parse_mode, caption_entities, message_effect_id, suggested_post_parameters)
 class Bot:
   def __init__(self) -> None:
     self.methods = _methods()

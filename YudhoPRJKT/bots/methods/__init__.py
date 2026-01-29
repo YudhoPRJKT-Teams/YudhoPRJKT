@@ -7,3 +7,4 @@ from .forward_message import forward_message
 from .forward_messages import forward_messages
 from .copy_message import copy_message
 from .copy_messages import copy_messages
+from .send_photo import send_photo
