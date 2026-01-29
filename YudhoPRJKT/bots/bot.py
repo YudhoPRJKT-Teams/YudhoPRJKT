@@ -133,6 +133,47 @@ class _methods:
         MessageId: On success, an array of MessageId of the sent messages is returned.
     """
     return forward_messages(chat_id, from_chat_id, message_ids, disable_notification, protect_content, message_thread_id, direct_messages_topic_id)
+  def copyMessage(self,
+    chat_id: int | str,
+    from_chat_id: int | str,
+    message_id: int,
+    show_caption_above_media: bool = True,
+    disable_notification: bool = False,
+    protect_content: bool = False,
+    allow_paid_broadcast: bool = True,
+    # Optional
+    message_thread_id: int | None = None,
+    direct_messages_topic_id: int | None = None,
+    video_start_timestamp: int | None = None,
+    caption: str | None = None,
+    parse_mode: ParseMode | None = None,
+    caption_entities: MessageEntity | None = None,
+    message_effect_id: str | None = None,
+    suggested_post_parameters: SuggestedPostParameters | None = None,
+  ):
+    """Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz [poll](https://core.telegram.org/bots/api#poll) can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method [forwardMessages](https://core.telegram.org/bots/api#forwardmessages), but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. 
+
+    Args:
+        chat_id (int | str): Unique identifier for the target chat or username of the target channel (in the format `@channelusername`)
+        from_chat_id (int | str): Unique identifier for the chat where the original messages were sent (or channel username in the format `@channelusername`)
+        message_id (int): A JSON-serialized list of 1-100 identifiers of messages in the chat from_chat_id to copy. The identifiers must be specified in a strictly increasing order.
+        show_caption_above_media (bool, optional): Pass True, if the caption must be shown above the message media. Ignored if a new caption isn't specified.. Defaults to True.
+        disable_notification (bool, optional): Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound. Defaults to False.
+        protect_content (bool, optional): Protects the contents of the sent message from forwarding and saving. Defaults to False.
+        allow_paid_broadcast (bool, optional): Pass True to allow up to 1000 messages per second, ignoring [broadcasting limits](https://core.telegram.org/bots/faq#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance. Defaults to True.
+        message_thread_id (int | None, optional): Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only. Defaults to None.
+        direct_messages_topic_id (int | None, optional): Identifier of the direct messages topic to which the messages will be sent; required if the messages are sent to a direct messages chat. Defaults to None.
+        video_start_timestamp (int | None, optional): New start timestamp for the copied video in the message. Defaults to None.
+        caption (str | None, optional): New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept. Defaults to None.
+        parse_mode (ParseMode | None, optional): Mode for parsing entities in the new caption. . Defaults to None.
+        caption_entities (MessageEntity | None, optional): A JSON-serialized list of special entities that appear in the new caption, which can be specified instead of parse_mode. Defaults to None.
+        message_effect_id (str | None, optional): Unique identifier of the message effect to be added to the message; only available when copying to private chats. Defaults to None.
+        suggested_post_parameters (SuggestedPostParameters | None, optional): A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only. If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.. Defaults to None.
+
+    Returns:
+        MessageId: On success, an array of MessageId of the sent messages is returned.
+    """
+    return copy_message(chat_id, from_chat_id, message_id, show_caption_above_media, disable_notification, protect_content, allow_paid_broadcast, message_thread_id, direct_messages_topic_id, video_start_timestamp, caption, parse_mode, caption_entities, message_effect_id, suggested_post_parameters)
 class Bot:
   def __init__(self) -> None:
     self.methods = _methods()

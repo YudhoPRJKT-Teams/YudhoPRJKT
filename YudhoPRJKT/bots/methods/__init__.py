@@ -5,3 +5,4 @@ from .get_updates import get_updates
 from .send_message import send_message
 from .forward_message import forward_message
 from .forward_messages import forward_messages
+from .copy_message import copy_message
