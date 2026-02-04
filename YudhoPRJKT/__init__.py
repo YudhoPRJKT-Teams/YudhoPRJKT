@@ -1,5 +1,5 @@
 # utils
-from .utils import Log, ParseMode, Inline, AI_Manager,  Telegraph, ExecutionTime
+from .utils import Log, ParseMode, Inline, AI_Manager,  Telegraph, ExecutionTime, CheckGempa
 from .utils.types_telegraph import Account, NodeElement, PageList, PageViews, Page
 # connector
 from .connector import TelegramMethods, BaseConnector
